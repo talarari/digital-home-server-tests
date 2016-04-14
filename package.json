@@ -1,0 +1,19 @@
+{
+  "name": "digital-home-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "chalk": "^1.1.3",
+    "mocha": "^2.4.5",
+    "mocha-clean": "^1.0.0"
+  }
+}
