@@ -4,14 +4,13 @@ var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
 var client = require('./tcp-client')(2424, 'localhost');
-
+const log = require('./logger')();
 const chalk = require('chalk');
-const chalkLog = (message, color) => console.log(chalk[color || 'cyan'](message));
 
 describe('**Digital home server tests**', function () {
 
     before(()=> {
-        chalkLog(`
+        log.i(`
 ------------------------------------------
 please run the server at localhost:2424.
 Digital home intial state should be:
@@ -20,7 +19,10 @@ Digital home intial state should be:
 ------------------------------------------
 `);
 
-        return client.connect().then(()=>chalkLog('Connected to server'));
+        return client.connect()
+            .then(()=>log.i('Connected to server'))
+            .catch(()=> log.e('Failed to connect to server. \nPlease make sure server is running on localhost:2424\n'));
+
     });
 
     describe(chalk.magenta('validate login:'), function () {
@@ -95,7 +97,14 @@ Digital home intial state should be:
         });
     });
 
-    after(()=> client.disconnect().then(()=>chalkLog('Disconnected from server')))
+    after(function(){
+        if (client.isConnected){
+            return client.disconnect()
+                .then(()=>log.i('Disconnected from server'))
+                .catch(err=> log.e('Failed to disconnect from server'))
+        }
+
+    })
 
 
 });
