@@ -10,7 +10,6 @@ module.exports  = (port,host)=> {
 
     const send = (message) => client.writeAsync(message,'UTF8').then(()=>
         new Promise((resolve,reject)=> {
-            console.log('wrote:' +message);
             const responseCallback = function(data){
                 client.removeListener('data',responseCallback);
                 resolve(strip(data.toString()));
