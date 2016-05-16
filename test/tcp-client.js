@@ -8,7 +8,7 @@ module.exports  = (port,host)=> {
     const client = bluebird.promisifyAll(socket);
     var isConnected = false;
 
-    const send = (message) => client.writeAsync(message,'UTF8').then(()=>
+    const send = (message) => client.writeAsync(message + "\n",'UTF8').then(()=>
         new Promise((resolve,reject)=> {
             const responseCallback = function(data){
                 client.removeListener('data',responseCallback);
