@@ -25,33 +25,6 @@ Digital home intial state should be:
 
     });
 
-    describe(chalk.magenta('validate login:'), function () {
-
-        describe('listDevices', function () {
-            it('should return "please login"', function () {
-                return client.send('listDevices').should.eventually.equal('please login');
-            })
-        });
-
-        describe('switch 1 off', function () {
-            it('should return "please login"', function () {
-                return client.send('switch 1 off').should.eventually.equal('please login');
-            })
-        });
-
-        describe('setValue 2 30', function () {
-            it('should return "please login"', function () {
-                return client.send('setValue 2 30').should.eventually.equal('please login');
-            })
-        });
-
-        describe('login john', function () {
-            it('should return "welcome john"', function () {
-                return client.send('login john').should.eventually.equal('welcome john');
-            });
-        });
-    });
-
     describe(chalk.magenta('listDevices:'), function () {
         describe('listDevices', function () {
 
